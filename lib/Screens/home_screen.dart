@@ -8,13 +8,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:real_state_auth/Screens/admin_screen.dart';
 import 'package:uuid/uuid.dart';
 
 import '../global.dart';
 import '../resources/storage_methos.dart';
 import '../utils/utils.dart';
 import '../widgets/input_text.dart';
+import 'admin_screen.dart';
 
 
 

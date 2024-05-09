@@ -1,8 +1,8 @@
 import 'dart:typed_data';
-
+import 'package:InfoLinker/resources/storage_methos.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:real_state_auth/resources/storage_methos.dart';
+
 
 class AuthMethods{
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;

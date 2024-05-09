@@ -1,12 +1,11 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:real_state_auth/Screens/admin_screen.dart';
-import 'package:real_state_auth/global.dart';
-import 'package:real_state_auth/widgets/input_text.dart';
-
+import '../global.dart';
 import '../resources/auth_methos.dart';
 import '../utils/utils.dart';
+import '../widgets/input_text.dart';
+import 'admin_screen.dart';
 import 'loginScreen.dart';
 
 

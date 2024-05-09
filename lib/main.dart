@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:real_state_auth/Screens/admin_screen.dart';
-import 'package:real_state_auth/Screens/loginScreen.dart';
+import 'Screens/admin_screen.dart';
+import 'Screens/loginScreen.dart';
 import 'firebase_options.dart';
 
 void main() async{

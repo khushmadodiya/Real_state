@@ -7,6 +7,7 @@ import '../resources/auth_methos.dart';
 import '../utils/utils.dart';
 import '../widgets/customer_detail_card.dart';
 import 'home_screen.dart';
+import 'loginScreen.dart';
 
 class AdminScreen extends StatefulWidget {
   const AdminScreen({super.key});
@@ -17,7 +18,7 @@ class AdminScreen extends StatefulWidget {
 
 class _AdminScreenState extends State<AdminScreen> {
   TextEditingController urlcontroller = TextEditingController();
-  String urlText = "https://real-state-60a2b.web.app/?uid=$adminuid";
+  String urlText = "https://rsauth-c.web.app/?uid=$adminuid";
 
   void _copyToClipboard() {
     Clipboard.setData(ClipboardData(text: urlText));
@@ -60,7 +61,7 @@ class _AdminScreenState extends State<AdminScreen> {
                 setState(() {
                   _loading = false;
                 });
-                Navigator.pop(context);
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
               },
             )
           ],
@@ -91,7 +92,10 @@ class _AdminScreenState extends State<AdminScreen> {
               flex: 1,
               child: Container(
                 width: 400,
+                padding: EdgeInsets.symmetric(vertical: 10,horizontal: 20),
+
                 child: Row(
+
                   children: [
                     Expanded(
                       child: Container(

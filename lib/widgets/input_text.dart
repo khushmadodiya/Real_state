@@ -6,7 +6,15 @@ class InputText extends StatelessWidget {
   final Icon icon;
   final TextEditingController controller;
   final TextInputType textInputType;
-  const InputText({super.key, required this.hint, required this.icon, required this.controller, required this.textInputType,  bool ispass=false});
+  final bool ispass ;
+  const InputText({
+    super.key,
+    required this.hint,
+    required this.icon,
+    required this.controller,
+    required this.textInputType,
+    this.ispass=false
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +29,7 @@ class InputText extends StatelessWidget {
         contentPadding: EdgeInsets.all(8)
       ),
       keyboardType: textInputType,
+      obscureText: ispass ? true : false,
     );
   }
 }

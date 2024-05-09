@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="real_state_auth"
+        android:label="InfoLinker"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

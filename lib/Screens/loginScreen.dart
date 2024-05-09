@@ -1,10 +1,9 @@
+import 'package:InfoLinker/Screens/sign_up_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:real_state_auth/Screens/admin_screen.dart';
-import 'package:real_state_auth/Screens/sign_up_screen.dart';
-import 'package:real_state_auth/utils/utils.dart';
-import 'package:real_state_auth/widgets/input_text.dart';
-
 import '../resources/auth_methos.dart';
+import '../utils/utils.dart';
+import '../widgets/input_text.dart';
+import 'admin_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);

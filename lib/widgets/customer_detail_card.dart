@@ -1,12 +1,16 @@
+
+import 'package:InfoLinker/widgets/field_container.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:real_state_auth/global.dart';
-import 'package:real_state_auth/resources/firestore_methods.dart';
-import 'package:real_state_auth/utils/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'package:flutter/services.dart';
+
+import '../global.dart';
+import '../resources/firestore_methods.dart';
+import '../utils/utils.dart';
 class CustomerCard extends StatefulWidget {
   final snap;
   const CustomerCard({
@@ -64,9 +68,11 @@ class _CustomerCardState extends State<CustomerCard> {
   }
 
   void _launchEmail(String emailAddress) async {
-    final url = 'mailto:$emailAddress';
-    if (await canLaunch(url)) {
-      await launch(url);
+    final url = Uri(scheme: 'mailto',path: emailAddress);
+    final weburl = Uri.parse('https://mail.google.com/mail/u/0/#inbox?compose=new');
+    Clipboard.setData(ClipboardData(text: emailAddress));
+    if (await canLaunchUrl(url)) {
+     kIsWeb? await launchUrl(weburl,mode: LaunchMode.inAppWebView): await launchUrl(url,mode: LaunchMode.externalApplication);
     } else {
       // Handle the case where Gmail cannot be launched
       print('Could not launch $url');
@@ -88,15 +94,18 @@ class _CustomerCardState extends State<CustomerCard> {
     }
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
+
     return Container(
       margin: EdgeInsets.symmetric(
-        horizontal: width > webScreenSize ? width * 0.3 : 30,
-        vertical: width > webScreenSize ? 15 : 10,
+        horizontal: width > webScreenSize ? width * 0.3 : 20,
+        vertical: width > webScreenSize ? 15 : 8,
       ),
-      height: MediaQuery.of(context).size.height / 4,
+      height: MediaQuery.of(context).size.height / 3.5,
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.white54,
@@ -111,7 +120,7 @@ class _CustomerCardState extends State<CustomerCard> {
           padding: MediaQuery.of(context).size.width > webScreenSize
               ? EdgeInsets.symmetric(
                   horizontal: MediaQuery.of(context).size.width * .05)
-              : const EdgeInsets.symmetric(horizontal: 50),
+              : const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -121,26 +130,27 @@ class _CustomerCardState extends State<CustomerCard> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  CircleAvatar(
-                    radius: 20,
-                    backgroundColor: Colors.white54,
-                    backgroundImage: widget.snap['profile'] != '' &&
-                            widget.snap['profile'] != null
-                        ? NetworkImage(widget.snap['profile'])
-                        : NetworkImage(
-                            'https://cdn-icons-png.flaticon.com/128/3106/3106921.png'),
+                  Card(
+                    elevation: 4,
+                    color: Colors.transparent,
+                    child: Container(
+                      width: 40,
+                      height: 30,
+                      child: Image.network( widget.snap['profile'] != '' &&
+                          widget.snap['profile'] != null
+                          ? widget.snap['profile'].toString()
+                          :
+                          'https://cdn-icons-png.flaticon.com/128/3106/3106921.png'),
+                    ),
                   ),
                   SizedBox(
-                    width: 20,
+                    width: 10,
                   ),
                   Expanded(
-                      child: Text(
-                    ' ${widget.snap['name'].toString()}',
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
-                  )),
+                    child: FieldContainer(
+                      text: '${widget.snap['name'].toString()}',
+                    ),
+                  ),
                 ],
               ),
               SizedBox(
@@ -151,29 +161,20 @@ class _CustomerCardState extends State<CustomerCard> {
                 onTap: () {
                   _launchEmail(widget.snap['email'].toString());
                 },
-                child: Text(
-                  '  ${widget.snap['email'].toString()}',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black),
-                ),
-              )),
-              SizedBox(
-                height: 15,
-              ),
+                child:FieldContainer(
+                  text:  '  ${widget.snap['email'].toString()}',
+                  icon: Icon(Icons.mail_outline,color: Colors.black,),
+                ),)),
+
               Expanded(
                   child: InkWell(
                     onTap:()=> _launchPhoneCall(widget.snap['phone'].toString()),
-                child: Text(
-                  '  ${widget.snap['phone'].toString()}',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black),
-                ),
+                child:FieldContainer(
+                  text:  '  ${widget.snap['phone'].toString()}',
+                  icon: Icon(Icons.phone,color: Colors.black,),
+                )
               )),
-            ],
+              SizedBox(height: 10,)            ],
           ),
         ),
       ),
