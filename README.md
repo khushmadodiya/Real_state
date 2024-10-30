@@ -4,7 +4,7 @@ A new Flutter project.
 
 ## Getting Started
 
-## This web app already hosted https://real-state-60a2b.web.app/  here you can check it.
+## This web app already hosted here https://real-state-60a2b.web.app/ you can check it.
 
 This project is a starting point for a Flutter application.
 
